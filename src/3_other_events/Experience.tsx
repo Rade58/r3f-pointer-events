@@ -23,6 +23,15 @@ export function Experience() {
   }
   // ------------------------------------------------------------
   // ------------------------------------------------------------
+  // Other Event Handlers
+  function handler(ev: ThreeEvent<MouseEvent>) {
+    ((ev.object as Mesh).material as MeshStandardMaterial).color.set(
+      `hsl(${Math.random() * 360}, 100%, 75%)`
+    );
+  }
+
+  // ------------------------------------------------------------
+  // ------------------------------------------------------------
 
   // const someControls = useControls("_", { test: 1 });
 
@@ -51,7 +60,22 @@ export function Experience() {
       {/* CUBE */}
 
       <mesh
-        onClick={clickEventHandler}
+        // onClick={clickEventHandler}
+        // onContextMenu={handler}
+        // onDoubleClick={handler}
+        // onPointerUp={handler}
+        // onPointerDown={handler}
+        // ----------------------------
+        // SAME (no difference since this is not native javascript)
+        // onPointerOver={handler}
+        // onPointerEnter={handler}
+        // ----------------------------
+        // SAME (no difference since this is not native javascript)
+        // onPointerOut={handler}
+        // onPointerLeave={handler}
+        // ----------------------------
+        // onPointerMove={handler}
+        //
         position={[2, 0, 0]}
         ref={cubeRef}
         scale={1.5}
