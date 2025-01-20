@@ -55,9 +55,7 @@ console.log("metakey", event.metakey); // If the COMMAND key was pressed
 
 Check `src/3_other_events/Experience.tsx`
 
-# Interesting events
-
-- `onPointerMissed`
+# `onPointerMissed`
 
 Triggers When the user clicks outside of the object we set handler
 
@@ -66,3 +64,24 @@ We can add it on the `<Canvas>` and it will be triggered if we click (when the c
 I also registered handler on the canvas, see here: `src/3_other_events/App.tsx`
 
 **THIS IS WHAT IS INTERESTING FOTR THIS EVENT IN CASE WHEN WE REGISTER ONE HANDLER ON CANVAS AND ONE HANDLER ON SOME MESH: IF WE CLICK AROUND (NOT ON THE MESH), EVENTS FOR CANVAS AND MESH WILL TRIGGER, BUT IF WE CLICK ON MESH, NO EVENTS WILL BE TRIGGERED**
+
+# How to know where to use which event?
+
+Let's take an RTS game as an example (Age of Empire or StarCraft)
+
+- When the player clicks on a unit, you want to select it
+- When the user drags and drops, you want to draw a rectangle and when it releases you want to select all units inside the rectangle
+- When the user clicks again but with the shift key, you want to add to the currently selected units or remove them if they were already selected
+- When the user clicks but there is no hit, you want to deselect every unit
+
+# Occluding
+
+If you register on click event handler on the mesh, and if you hide, entirly or partialy the mesh by other random mesh, and if you click on the random mesh, probably raycaster ray will go through the object and event will be triggered
+
+What if we want to occlude the other "random" object
+
+We will register on click event ton that random element too, **And there we will prevent event to be propagated**
+
+`event.stopPropagation()`
+
+# Cursor
