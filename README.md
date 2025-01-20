@@ -84,4 +84,8 @@ We will register on click event ton that random element too, **And there we will
 
 `event.stopPropagation()`
 
-# Cursor
+# Cursor change
+
+On desktop: We want to transfor cursor into a finger cursor when we hover clickable object
+
+Here we use `onPointerEnter` and `onPointerLeave` events
