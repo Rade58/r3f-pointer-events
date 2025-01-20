@@ -101,3 +101,50 @@ and we need to use useState
 **only place where I would use this is in separate component for entire mesh, making sure that that mesh is being rerender and not entire Experience**
 
 **Author of the workshop isn't using this one, it uses previous solution**
+
+# Events on complex objects
+
+We will test this on our donut, check `src/7_events_on_complex_objects/Donut.tsx`
+
+`<primitive />` is the group under the hood so when we add event handler it is like we are listening events on the group
+
+You can access entire group in the handler with `event.eventObject`
+
+**YOU SHOULD PAY ATTENTON ON PROPAGATION HERE TOO, SINCE IF YOU RAYCASTER RAY INTERSECTS ALL OF THE MESHES OF YOUR MODEL, MULTIPLE CLICK EVENTS WILL BE TRIGGERED, FOR EACHS MODEL MESH THAT IS INTERSECTED BY RAY**
+
+SO WE CAN USE `event.stopPropagation()`
+
+If we console loge from handler, We get multiple console.log for each click because the ray is going through multiple objects at once
+
+Even though we listen to the event on the parent, R3F will test the meshes
+inside
+
+Also check the names when you are doing this, with `e.object.name`
+
+**Problem can occur when one object is parent of another one**
+
+todo: Try to find solution in this case, for example problem can occur when donut is parent of icing, and if you want to scale just clicke donut, icing will also sacale, but if you click icing, just icing will scale
+
+**BUT I THINK ONLY SOLUTION THAT IS GOOD WOULD BE GOING BACK TO BLANDER AND REMOVING THAT PARENT RELATIONSHIP**
+
+# Performances
+
+Listening to pointer events is quite a taxing task for the CPU
+Keep an eye on performance (especially on low-end devices) and optimise as you can
+
+Avoid events that need to be tested on each frame:
+
+- onPointerOver
+- onPointerEnter
+- onPointerOut
+- onPointerLeave
+- onPointerMove
+
+Minimise the number of objects that listen to events and avoid testing complex geometries
+If you notice a freeze, even a short one when interacting, you'll have some more optimisation to do
+
+## **use `meshBounds`**
+
+<https://drei.docs.pmnd.rs/performances/mesh-bounds#meshbounds>
+
+meshBounds will create a theoretical sphere around the mesh (called bounding sphere) and the pointer events will be tested on that sphere instead of testing the geometry of the mesh
