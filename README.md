@@ -58,3 +58,11 @@ Check `src/3_other_events/Experience.tsx`
 # Interesting events
 
 - `onPointerMissed`
+
+Triggers When the user clicks outside of the object we set handler
+
+We can add it on the `<Canvas>` and it will be triggered if we click (when the click is released) but none of the listen objects have registered a hit
+
+I also registered handler on the canvas, see here: `src/3_other_events/App.tsx`
+
+**THIS IS WHAT IS INTERESTING FOTR THIS EVENT IN CASE WHEN WE REGISTER ONE HANDLER ON CANVAS AND ONE HANDLER ON SOME MESH: IF WE CLICK AROUND (NOT ON THE MESH), EVENTS FOR CANVAS AND MESH WILL TRIGGER, BUT IF WE CLICK ON MESH, NO EVENTS WILL BE TRIGGERED**

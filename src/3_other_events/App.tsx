@@ -15,6 +15,9 @@ export function App() {
     <>
       {/* <Leva /> */}
       <Canvas
+        onPointerMissed={() => {
+          console.log("on pointer missed on canvas");
+        }}
         // onCreated={created}
         // dpr={[1, 2]}
         // flat

@@ -29,7 +29,17 @@ export function Experience() {
       `hsl(${Math.random() * 360}, 100%, 75%)`
     );
   }
+  // ------------------------------------------------------------
+  // ------------------------------------------------------------
+  function otherHandler(ev: MouseEvent) {
+    console.log({ ev });
 
+    if (cubeRef.current) {
+      (cubeRef.current.material as MeshStandardMaterial).color.set(
+        `hsl(${Math.random() * 360}, 100%, 75%)`
+      );
+    }
+  }
   // ------------------------------------------------------------
   // ------------------------------------------------------------
 
@@ -75,6 +85,11 @@ export function Experience() {
         // onPointerLeave={handler}
         // ----------------------------
         // onPointerMove={handler}
+        // ----------------------------
+        // if you click on this mesh
+        // it won't be triggered
+        // if you click around it will be triggered (very interesting)
+        onPointerMissed={otherHandler}
         //
         position={[2, 0, 0]}
         ref={cubeRef}
