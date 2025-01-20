@@ -148,3 +148,15 @@ If you notice a freeze, even a short one when interacting, you'll have some more
 <https://drei.docs.pmnd.rs/performances/mesh-bounds#meshbounds>
 
 meshBounds will create a theoretical sphere around the mesh (called bounding sphere) and the pointer events will be tested on that sphere instead of testing the geometry of the mesh
+
+I used it here on the cube mesh: `src/8_meshBounds/Experience.tsx`
+
+Try to move cursor slowly closer to the cube, you will see that cursor enter event will run even you didn't actually enter cube
+
+## BVG (Bounding Volume Hierarchy)
+
+If you have very complex geometries and still need the pointer events to be accurate, you can also use the BVH (Bounding Volume Hierarchy)
+
+it is more complex approach
+
+check it out: <https://drei.docs.pmnd.rs/performances/bvh#bvh>
