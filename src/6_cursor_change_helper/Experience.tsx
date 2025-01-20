@@ -1,9 +1,9 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { ThreeEvent, useFrame } from "@react-three/fiber";
 
 import { MeshStandardMaterial, type Mesh } from "three";
 
-import { OrbitControls /* Stage */ } from "@react-three/drei";
+import { OrbitControls /* Stage */, useCursor } from "@react-three/drei";
 
 // import { Perf } from "r3f-perf";
 
@@ -22,6 +22,20 @@ type CursorType =
   | "zoom-out";
 
 export function Experience() {
+  const [hovered, setHovered] = useState(false);
+
+  useCursor(hovered /*'pointer', 'auto', document.body*/);
+
+  function over() {
+    setHovered(true);
+  }
+  function out() {
+    setHovered(false);
+  }
+
+  // ----------------------------------------------------------
+
+  // ----------------------------------------------------------
   // Handling mouse enter and leave
   function enter(e: ThreeEvent<MouseEvent>) {
     // console.log({ e });
@@ -91,6 +105,8 @@ export function Experience() {
     }
   });
 
+  console.log("render");
+
   return (
     <>
       {/* <Perf position="top-left" /> */}
@@ -128,8 +144,13 @@ export function Experience() {
         //
         // ----------------------------
         // enter and leave
-        onPointerEnter={enter}
-        onPointerLeave={leave}
+        // onPointerEnter={enter}
+        // onPointerLeave={leave}
+        //
+        // --------------------------------
+        // instead of enter and leave we do this
+        onPointerOver={over}
+        onPointerOut={out}
         //
         position={[2, 0, 0]}
         ref={cubeRef}

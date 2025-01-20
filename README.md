@@ -89,3 +89,15 @@ We will register on click event ton that random element too, **And there we will
 On desktop: We want to transfor cursor into a finger cursor when we hover clickable object
 
 Here we use `onPointerEnter` and `onPointerLeave` events
+
+# Cursor change with `useCursor` helper from drei
+
+we use this with evenet handlers `onPointerOver` and `onPointerOut`
+
+and we need to use useState
+
+**I don't like this, because it causes rerender**
+
+**only place where I would use this is in separate component for entire mesh, making sure that that mesh is being rerender and not entire Experience**
+
+**Author of the workshop isn't using this one, it uses previous solution**
